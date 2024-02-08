@@ -7,7 +7,6 @@ import datetime
 import re
 
 from pathlib import Path
-from py7zr import SevenZipFile
 from pydantic import BaseModel, Field, model_validator
 
 
