@@ -24,8 +24,12 @@ def delete_files(path, days, regex):
 
 
 def create_7z_archive(input_file: Path, output_archive: Path):
-    with SevenZipFile(output_archive, 'w') as sevenZip_archive:
-        sevenZip_archive.write(input_file, input_file.name)
+    if Path("7za.exe").exists():
+        os.system(f"7za a {output_archive} {input_file}")
+    else:
+        logging.error(f"7za.exe is missing! 7z archiving is not possible!")
+
+
 
 
 class Database(BaseModel):
@@ -149,13 +153,11 @@ class Database(BaseModel):
 
         if Path(f"{self.get_backup_dir}\\{backup_filename}.db").exists():
             logging.info(f"Archivation of {self.get_name} started")
-
             create_7z_archive(Path(f"{self.get_backup_dir}\\{backup_filename}.db"),
                               Path(f"{self.get_backup_dir}\\{backup_filename}.7z"))
-
-            logging.info(f"Archivation of {self.get_name} ended")
-
-            logging.info(f"Deleting {self.get_backup_dir}\\{backup_filename}.db")
-            os.remove(f"{self.get_backup_dir}\\{backup_filename}.db")
+            if Path(f"{self.get_backup_dir}\\{backup_filename}.7z").exists():
+                logging.info(f"Archivation of {self.get_name} ended")
+                logging.info(f"Deleting {self.get_backup_dir}\\{backup_filename}.db")
+                os.remove(f"{self.get_backup_dir}\\{backup_filename}.db")
         else:
             logging.error(f"Backup of {self.get_name} is missing!")

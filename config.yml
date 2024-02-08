@@ -5,7 +5,10 @@ services: []
 sch-tasks: []
 delete-after-days: 7
 databases:
-- db-path: D:\Documents\VSD\2024\db-test\cart\cart_iemk.db
+- db-path: D:\Documents\VSD\2024\db-test\db\msexp.db
+- db-path: D:\Documents\VSD\2024\db-test\sended_api\sended_api.db
+- db-path: D:\Documents\VSD\2024\db-test\stat\statbase.db
+  backup-dir: D:\Documents\VSD\2024\db-test
 
 
 
