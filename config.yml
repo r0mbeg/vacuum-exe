@@ -1,0 +1,15 @@
+---
+lpu-name: test-lpu
+iis: false
+services: []
+sch-tasks: []
+delete-after-days: 7
+databases:
+- db-path: D:\Documents\VSD\2024\db-test\cart\cart_iemk.db
+
+
+
+
+
+
+
