@@ -29,8 +29,6 @@ def create_7z_archive(input_file: Path, output_archive: Path):
         logging.error(f"7za.exe is missing! 7z archiving is not possible!")
 
 
-
-
 class Database(BaseModel):
     path: Path = Field(description="Path to database", alias="db-path")
     backup_dir: Path = Field(description="Path to backup dir", alias="backup-dir", default=None)
@@ -97,9 +95,9 @@ class Database(BaseModel):
         logging.info(f"Backup of {str(self.get_name)} started")
         logging.info("Deleting old backups and archives")
 
-        delete_files(self.get_backup_dir, self.get_delete_after_days, f"{str(self.get_name)}_backup_.*.db")
-        delete_files(self.get_backup_dir, self.get_delete_after_days, f"{str(self.get_name)}_backup_.*.7z")
-        delete_files(self.get_backup_dir, self.get_delete_after_days, f"{str(self.get_name)}_archive_.*.db")
+        delete_files(self.get_backup_dir, self.get_delete_after_days, r"^{str(self.get_name)}_backup_.*\.db$")
+        delete_files(self.get_backup_dir, self.get_delete_after_days, r"^{str(self.get_name)}_backup_.*\.7z$")
+        delete_files(self.get_backup_dir, self.get_delete_after_days, r"^{str(self.get_name)}_archive_.*\.db$")
 
         logging.info("Old backups and archives are deleted")
 
