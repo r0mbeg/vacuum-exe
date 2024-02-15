@@ -89,7 +89,7 @@ if __name__ == "__main__":
     config = Config.model_validate(config_yaml)
 
     logging.info("Deleting old logs")
-    delete_files(Path.cwd(), config.get_delete_after_days, "backup_.*.log")
+    delete_files(Path.cwd(), config.get_delete_after_days, fr"^backup_.*.log$")
     logging.info("Old logs deleted")
 
     for db in config.databases:
