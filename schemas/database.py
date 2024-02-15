@@ -95,9 +95,9 @@ class Database(BaseModel):
         logging.info(f"Backup of {str(self.get_name)} started")
         logging.info("Deleting old backups and archives")
 
-        delete_files(self.get_backup_dir, self.get_delete_after_days, r"^{str(self.get_name)}_backup_.*\.db$")
-        delete_files(self.get_backup_dir, self.get_delete_after_days, r"^{str(self.get_name)}_backup_.*\.7z$")
-        delete_files(self.get_backup_dir, self.get_delete_after_days, r"^{str(self.get_name)}_archive_.*\.db$")
+        delete_files(self.get_backup_dir, self.get_delete_after_days, fr"^{str(self.get_name)}_backup_.*\.db$")
+        delete_files(self.get_backup_dir, self.get_delete_after_days, fr"^{str(self.get_name)}_backup_.*\.7z$")
+        delete_files(self.get_backup_dir, self.get_delete_after_days, fr"^{str(self.get_name)}_archive_.*\.db$")
 
         logging.info("Old backups and archives are deleted")
 
